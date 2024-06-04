@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">BeautyBoost</string>
+    <string name="gettingstarted_1.1">
+        Get Instant Consult For\n
+        Your Skin Face Problem</string>
+    <string name="gettingstarted_1.2">Now you can check your skin problem within\n
+        the app directly and get fast report  about your skin\n
+        problem </string>
+    <string name="gettingstarted_2.1">Find Trustworthy About\n
+    Your Skin Treatment</string>
+    <string name="gettingstarted_2.2">You will receive the most accurate information\n
+        and treatment recommendations for your skin \n
+        condition</string>
 </resources>
