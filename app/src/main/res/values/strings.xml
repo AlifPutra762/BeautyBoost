@@ -11,4 +11,6 @@
     <string name="gettingstarted_2.2">You will receive the most accurate information\n
         and treatment recommendations for your skin \n
         condition</string>
+    <string name="web_client_id">986567722628-03178kc7pq6nmt2h16hm8mbbhslt0uo5.apps.googleusercontent.com</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

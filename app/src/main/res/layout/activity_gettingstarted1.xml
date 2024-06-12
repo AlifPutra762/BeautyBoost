@@ -5,12 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gettingstarted1">
+    tools:context=".ui.GettingStarted1">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="287dp"
-        android:layout_height="72dp"
+        android:id="@+id/textVie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="62dp"
@@ -24,37 +24,40 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="62dp"
         android:fontFamily="@font/plusjakartasans_italic"
         android:text="@string/gettingstarted_1.2"
         android:textAlignment="center"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textVie" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="41dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="42dp"
-        android:layout_marginBottom="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
         app:srcCompat="@drawable/woman1" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="331dp"
-        android:layout_height="59dp"
+        android:id="@+id/button_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/plusjakartasans_bolditalic"
         android:text="Next"
         android:textColorLink="#EF873D"
