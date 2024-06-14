@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-
         }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

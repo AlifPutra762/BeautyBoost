@@ -8,12 +8,10 @@
     tools:context=".ui.GettingStarted1">
 
     <TextView
-        android:id="@+id/textVie"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
+        android:id="@+id/textView"
+        android:layout_width="287dp"
+        android:layout_height="72dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="62dp"
         android:fontFamily="@font/plusjakartasans_bolditalic"
         android:text="@string/gettingstarted_1.1"
         android:textAlignment="center"
@@ -21,47 +19,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="62dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:fontFamily="@font/plusjakartasans_italic"
         android:text="@string/gettingstarted_1.2"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textVie" />
+        app:layout_constraintTop_toBottomOf="@id/textView" />
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_next"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/woman1" />
 
     <Button
-        android:id="@+id/button_next"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/nextButton"
+        android:layout_width="331dp"
+        android:layout_height="59dp"
         android:fontFamily="@font/plusjakartasans_bolditalic"
         android:text="Next"
-        android:textColorLink="#EF873D"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button"
+        android:textColorLink="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

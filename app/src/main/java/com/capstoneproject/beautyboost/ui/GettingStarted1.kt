@@ -15,7 +15,7 @@ class GettingStarted1 : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         enableEdgeToEdge()
-        setContentView(R.layout.activity_gettingstarted1)
+        setContentView(R.layout.activity_getting_started1)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -23,14 +23,14 @@ class GettingStarted1 : AppCompatActivity(), View.OnClickListener {
             insets
         }
 
-        val btnNext: Button = findViewById(R.id.button_next)
+        val btnNext: Button = findViewById(R.id.nextButton)
         btnNext.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.button_next -> {
-                val moveIntent = Intent(this@GettingStarted1, GettingStarted2::class.java)
+            R.id.nextButton -> {
+                val moveIntent = Intent(this, GettingStarted2::class.java)
                 startActivity(moveIntent)
             }
         }
