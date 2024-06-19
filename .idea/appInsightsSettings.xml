@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.capstoneproject.beautyboost" />
+                  <option name="mobileSdkAppId" value="1:986567722628:android:d135a6da6c6b5bb11464d1" />
+                  <option name="projectId" value="beautyboost-76811" />
+                  <option name="projectNumber" value="986567722628" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

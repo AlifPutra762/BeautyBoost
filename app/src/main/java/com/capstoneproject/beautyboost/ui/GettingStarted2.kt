@@ -30,7 +30,7 @@ class GettingStarted2 : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button_getting_started -> {
-                val moveIntent = Intent(this@GettingStarted2, LoginActivity::class.java)
+                val moveIntent = Intent(this@GettingStarted2, ProfileActivity::class.java)
                 startActivity(moveIntent)
             }
         }

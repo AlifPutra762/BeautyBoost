@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("/Users/taufikamf/BeautyBoost/BeautyBoost.jks")
+            storePassword = "123456789"
+            keyAlias = "BeautyBoost"
+            keyPassword = "123456789"
+        }
+    }
     namespace = "com.capstoneproject.beautyboost"
     compileSdk = 34
 
@@ -62,4 +70,5 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("com.google.android.material:material:1.3.0-alpha03")
 }

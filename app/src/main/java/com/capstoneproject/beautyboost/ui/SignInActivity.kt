@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.capstoneproject.beautyboost.MainActivity
@@ -21,16 +22,15 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.logger.Logger
 
 class SignInActivity : AppCompatActivity() {
 
     companion object {
-        private const val RC_SIGN_IN = 3002
+        private const val RC_SIGN_IN = 9001
     }
 
     private lateinit var auth: FirebaseAuth
-
-    private var loadingDialog: Dialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,21 +44,19 @@ class SignInActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         val currentUser = auth.currentUser
+
         if (currentUser != null) {
+            // The user is already signed in, navigate to MainActivity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-        val btnGoogle = findViewById<Button>(R.id.BtnGoogle)
-        btnGoogle.setOnClickListener {
+
+        val googleButton = findViewById<ConstraintLayout>(R.id.BtnGoogle)
+        googleButton.setOnClickListener {
+            showLoadingDialog()
             signIn()
         }
-
-//        showLoadingDialog("Loading, please wait...")
-//        // Simulate a delay to demonstrate the loading modal
-//        Handler().postDelayed({
-//            hideLoadingDialog()
-//        }, 3000)
     }
 
     private fun signIn() {
@@ -99,22 +97,6 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    private fun showLoadingDialog(message: String) {
-        if (loadingDialog == null) {
-            loadingDialog = Dialog(this)
-            val view = LayoutInflater.from(this).inflate(R.layout.custom_loading, null)
-            loadingDialog?.setContentView(view)
-            loadingDialog?.setCancelable(false)
-            loadingDialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        }
-        loadingDialog?.findViewById<TextView>(R.id.textViewBar)?.text = message
-        loadingDialog?.show()
-    }
-
-    private fun hideLoadingDialog() {
-        loadingDialog?.dismiss()
-    }
-
     private fun showSuccessDialog(userName: String?) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_success, null)
         val checkIcon = dialogView.findViewById<ImageView>(R.id.checkIcon)
@@ -130,11 +112,22 @@ class SignInActivity : AppCompatActivity() {
 
         okButton.setOnClickListener {
             dialog.dismiss()
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, ProfileActivity::class.java))
             finish()
         }
 
         dialog.show()
     }
+
+    private fun showLoadingDialog() {
+//        val dialogBinding = CustomDialogBinding.inflate(LayoutInflater.from(this))
+        val loaderView = layoutInflater.inflate(R.layout.custom_loading, null)
+        val loaderDialog = AlertDialog.Builder(this)
+            .setView(loaderView)
+            .setCancelable(false)
+            .create()
+        loaderDialog.show()
+    }
+
 
 }

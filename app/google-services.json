@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "986567722628-g4m03m7fb51cdnlr91jdvmbf35l4sh2l.apps.googleusercontent.com",
+          "client_id": "986567722628-n495adgto4p0i4n09msjgbb4fliu2mbn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.capstoneproject.beautyboost",
-            "certificate_hash": "dddf507f2e7ccc9f813e796e630aa6845b48887e"
+            "certificate_hash": "6244bba45853355d3880e537d6583e904b4ef2b6"
           }
         },
         {
