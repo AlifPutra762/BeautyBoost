@@ -174,20 +174,29 @@
 			style="@style/CustomRadioButton"
 			android:background="@drawable/radio_button_selector" />
 	</RadioGroup>
-	
-	<Button
-		android:id="@+id/submitButton"
-		android:background="@drawable/rounded_button_grey"
-		android:layout_marginHorizontal="20dp"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Submit"
-		android:layout_gravity="center"
-		android:backgroundTint="@color/orange"
-		android:textColor="#FFFFFF"
-		android:layout_marginTop="16dp"
-		android:enabled="false"/>
 		
+		<androidx.appcompat.widget.AppCompatButton
+			android:id="@+id/submitButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginHorizontal="20dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/rounded_button_grey"
+			android:backgroundTint="@color/orange"
+			android:text="Submit"
+			android:textColor="#FFFFFF" />
+		
+		<androidx.appcompat.widget.AppCompatButton
+			android:id="@+id/logoutButton"
+			android:background="@drawable/rounded_outline_button"
+			android:layout_marginHorizontal="20dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Logout"
+			android:layout_gravity="center"
+			android:textColor="@color/black"
+			android:layout_marginTop="16dp"/>
 	</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

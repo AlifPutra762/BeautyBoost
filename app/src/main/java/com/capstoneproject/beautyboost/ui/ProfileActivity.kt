@@ -1,9 +1,11 @@
 package com.capstoneproject.beautyboost.ui
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -41,9 +43,6 @@ class ProfileActivity : AppCompatActivity() {
             insets
         }
 
-        binding.nameTextField.addOnEditTextAttachedListener { fieldWatcher }
-        binding.ageEditText.addTextChangedListener(fieldWatcher)
-
         auth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -65,17 +64,20 @@ class ProfileActivity : AppCompatActivity() {
             binding.nameTextField.editText?.setText(userName)
         }
 
+        val btnLogout = findViewById<Button>(R.id.logoutButton)
+        btnLogout.setOnClickListener{
+            signOut()
+        }
+
         binding.skinTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val radioButton = findViewById<RadioButton>(checkedId)
             skinType = radioButton.text.toString()
-            checkFormCompletion()
         }
 
         // Set up the gender radio group
         binding.genderRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val radioButton = findViewById<RadioButton>(checkedId)
             gender = radioButton.text.toString()
-            checkFormCompletion()
         }
 
         binding.submitButton.setOnClickListener {
@@ -86,6 +88,8 @@ class ProfileActivity : AppCompatActivity() {
             if (name.isNotEmpty() && age.isNotEmpty() && skinType.isNotEmpty() && gender.isNotEmpty()) {
                 val message = "Name: $name, Age: $age, Skin Type: $skinType, Gender: $gender"
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                val moveIntent = Intent(this@ProfileActivity, HomeActivity::class.java)
+                startActivity(moveIntent)
             } else {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
             }
@@ -93,17 +97,13 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    private val fieldWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            checkFormCompletion()
-        }
-        override fun afterTextChanged(s: Editable?) {}
-    }
+    private fun signOut() {
+        auth.signOut()
 
-    private fun checkFormCompletion() {
-        val name = binding.nameTextField.editText?.text.toString()
-        val age = binding.ageEditText.text.toString()
-        binding.submitButton.isEnabled = name.isNotEmpty() && age.isNotEmpty() && skinType.isNotEmpty() && gender.isNotEmpty()
+        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+            val intent = Intent(this@ProfileActivity, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

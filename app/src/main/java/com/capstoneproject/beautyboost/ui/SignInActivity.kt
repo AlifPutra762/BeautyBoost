@@ -1,10 +1,7 @@
 package com.capstoneproject.beautyboost.ui
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,8 +18,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.logger.Logger
 
 class SignInActivity : AppCompatActivity() {
 
@@ -31,6 +28,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,7 +42,6 @@ class SignInActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         val currentUser = auth.currentUser
-
         if (currentUser != null) {
             // The user is already signed in, navigate to MainActivity
             val intent = Intent(this, MainActivity::class.java)
@@ -57,6 +54,12 @@ class SignInActivity : AppCompatActivity() {
             showLoadingDialog()
             signIn()
         }
+
+        val guestButton = findViewById<Button>(R.id.BtnGuest)
+        guestButton.setOnClickListener {
+            showLoadingDialog()
+            signInGuest()
+        }
     }
 
     private fun signIn() {
@@ -68,6 +71,18 @@ class SignInActivity : AppCompatActivity() {
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun signInGuest() {
+        auth.signInAnonymously()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    showSuccessDialog(user?.displayName)
+                } else {
+                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -120,7 +135,6 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun showLoadingDialog() {
-//        val dialogBinding = CustomDialogBinding.inflate(LayoutInflater.from(this))
         val loaderView = layoutInflater.inflate(R.layout.custom_loading, null)
         val loaderDialog = AlertDialog.Builder(this)
             .setView(loaderView)
@@ -128,6 +142,4 @@ class SignInActivity : AppCompatActivity() {
             .create()
         loaderDialog.show()
     }
-
-
 }
