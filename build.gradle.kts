@@ -4,3 +4,4 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.googleGmsGoogleServices) apply false
 }
+val myValue by extra("C:\\Users\\User\\Documents\\beautyboostnew\\BeautyBoost.jks")

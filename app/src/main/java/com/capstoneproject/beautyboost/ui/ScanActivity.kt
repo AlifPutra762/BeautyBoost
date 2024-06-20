@@ -1,5 +1,6 @@
 package com.capstoneproject.beautyboost.ui
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.capstoneproject.beautyboost.databinding.ActivityScanBinding
 import com.google.firebase.auth.ktx.auth
@@ -23,10 +25,40 @@ class ScanActivity : AppCompatActivity() {
     val auth = Firebase.auth
     val user = auth.currentUser
 
+    val permission = Manifest.permission.READ_EXTERNAL_STORAGE
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission granted, proceed with uploading the image
+//                    if(notGra)
+            } else {
+                // Permission denied, explain to the user why it's needed
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val requestPermissionLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted: Boolean ->
+                if (isGranted) {
+                    // Permission granted, proceed with uploading the image
+//                    if(notGra)
+                } else {
+                    // Permission denied, explain to the user why it's needed
+                    requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
+            }
+
+        requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+
 
         if (user != null) {
             val userName = user.displayName?.split(" ")?.get(0) ?: "User"
@@ -42,11 +74,21 @@ class ScanActivity : AppCompatActivity() {
         binding.removeImageIcon.setOnClickListener {
             removeImage()
         }
+
+        binding.submitImage.setOnClickListener {
+            moveToResult()
+        }
     }
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+
+    private fun moveToResult() {
+        val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUri.toString())
+        startActivity(intent)
     }
 
     private fun removeImage() {
@@ -78,4 +120,7 @@ class ScanActivity : AppCompatActivity() {
             binding.textView.visibility = View.GONE
         }
     }
+
+
+
 }

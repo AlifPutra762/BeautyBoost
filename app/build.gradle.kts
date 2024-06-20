@@ -7,7 +7,7 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
-            storeFile = file("/Users/taufikamf/BeautyBoost/BeautyBoost.jks")
+            storeFile = file(rootProject.extra["myValue"] as String)
             storePassword = "123456789"
             keyAlias = "BeautyBoost"
             keyPassword = "123456789"
@@ -74,4 +74,9 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("com.google.android.material:material:1.3.0-alpha03")
+
+    implementation ("com.squareup.okhttp3:okhttp:4.9.2")
+    implementation ("com.squareup.okio:okio:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 }
