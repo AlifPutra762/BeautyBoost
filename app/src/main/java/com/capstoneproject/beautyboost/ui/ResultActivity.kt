@@ -91,16 +91,16 @@ class ResultActivity : AppCompatActivity() {
         binding.progressBar.visibility = android.view.View.GONE
 
         if (totalAcne < 5) {
-            binding.resultText.text = "LOW: $totalAcne"
+//            binding.resultText.text = "LOW: $totalAcne"
             binding.resultMeter.setImageResource(R.drawable.low)
             binding.resultDesc.text = getString(R.string.low)
         } else if (totalAcne < 10) {
-            binding.resultText.text = "MEDIUM: $totalAcne"
+//            binding.resultText.text = "MEDIUM: $totalAcne"
             binding.resultMeter.setImageResource(R.drawable.mid)
             binding.resultDesc.text = getString(R.string.mid)
 
         } else {
-            binding.resultText.text = "HIGH: $totalAcne"
+//            binding.resultText.text = "HIGH: $totalAcne"
             binding.resultMeter.setImageResource(R.drawable.high)
             binding.resultDesc.text = getString(R.string.high)
         }

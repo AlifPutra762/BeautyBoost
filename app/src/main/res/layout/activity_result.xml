@@ -37,13 +37,6 @@
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/netral" />
 
-                <TextView
-                    android:id="@+id/result_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="@string/result"
-                    android:textSize="23sp" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_rekomendasi"

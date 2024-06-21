@@ -76,7 +76,9 @@ class ScanActivity : AppCompatActivity() {
         }
 
         binding.submitImage.setOnClickListener {
-            moveToResult()
+            if (imageUri != null) {
+                moveToResult()
+            }
         }
     }
 
