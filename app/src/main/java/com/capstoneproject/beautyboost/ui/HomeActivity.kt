@@ -7,13 +7,19 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstoneproject.beautyboost.R
 import com.capstoneproject.beautyboost.databinding.ActivityHomeBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    val auth = Firebase.auth
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private var auth = Firebase.auth
     val user = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,14 +29,27 @@ class HomeActivity : AppCompatActivity() {
 
         if (user != null) {
             val userName = user.displayName?.split(" ")?.get(0) ?: "User"
-            binding.name.text = "Hi, " + userName + "  \uD83D\uDC4B"
+            binding.name.text = "Selamat Datang, " + userName
         } else {
             // Handle the case when the user is not signed in
         }
 
+        auth = FirebaseAuth.getInstance()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
         binding.analyzeButton.root.setOnClickListener {
             val intent = Intent(this, ScanActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.logoutButton.setOnClickListener {
+            signOut()
         }
 
         // Set up RecyclerView
@@ -42,11 +61,20 @@ class HomeActivity : AppCompatActivity() {
     private fun getArticlesList(): List<Article> {
         // Dummy data, replace with real data fetching logic
         return listOf(
-            Article("Article 1", "Description 1"),
-            Article("Article 2", "Description 2"),
-            Article("Article 3", "Description 3"),
-            Article("Article 4", "Description 4"),
-            Article("Article 5", "Description 5")
+            Article("How Sunlight, the Immune System, and Covid-19 Interact", "For thousands of years, humans have recognized that the sun plays a role in the emergence and transmission of viruses"),
+            Article("The Science Behind Improving Your Immune System", "Today i will talk about that science about your immune system that nobody ever talk about"),
+            Article("Doctors Test the Limits of What Obesity Drugs Can Fix", "“Obesity first” doctors say they start with one medication, to treat obesity, and often find other chronic diseases."),
+            Article("Researchers Say Social Media Warning Is Too Broad", "Some scientists who study youth mental health say the evidence does not support the notion that social media is harmful.")
         )
+    }
+
+    private fun signOut() {
+        auth.signOut()
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+            val intent = Intent(this@HomeActivity, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
