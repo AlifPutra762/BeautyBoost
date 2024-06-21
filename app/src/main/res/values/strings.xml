@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">BeautyBoost</string>
+    <string name="rekomendasi_perawatan">Rekomendasi Perawatan</string>
+    <string name="rekomendasi_produk">Produk Rekomendasi</string>
     <string name="gettingstarted_1.1">
         Get Instant Consult For\n
         Your Skin Face Problem</string>
@@ -15,5 +17,24 @@
     <string name="sign_out">Sign Out</string>
     <string name="result">- LOADING -</string>
 
+    <string name="low">  Selamat! Kulit wajah Anda tampak bersih dan bebas jerawat.\n
+    Jaga kesehatan kulit dengan pola makan bergizi, minum air putih yang cukup, dan istirahat yang cukup.\n
+        Gunakan pelembab wajah secara rutin untuk menjaga hidrasi kulit.
+ </string>
+
+    <string name="mid">  Terlihat beberapa jerawat di area wajah anda \n
+    Gunakan produk skincare khusus untuk kulit berjerawat, seperti pembersih wajah yang lembut, toner, pelembab oil-free, dan obat jerawat \n
+        Hindari memencet atau menyentuh jerawat agar tidak semakin parah. \n
+        Konsultasikan dengan dokter kulit jika jerawat tidak kunjung membaik.
+ </string>
+
+    <string name="high">  Kulit wajah Anda terlihat kemerahan dan terdapat banyak jerawat \n
+    Gunakan produk skincare khusus untuk kulit berjerawat, seperti pembersih wajah yang lembut, toner, pelembab oil-free, dan obat jerawat \n
+        Hindari memencet atau menyentuh jerawat agar tidak semakin parah. \n
+        Konsultasikan dengan dokter kulit jika jerawat tidak kunjung membaik.
+    </string>
+    <string name="placeholder_s">________________</string>
+    <string name="placeholder_m">________________________________</string>
+    <string name="placeholder_l">________________________________________________________________________________________________</string>
 
 </resources>

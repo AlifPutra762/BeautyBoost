@@ -1,5 +1,6 @@
 package com.capstoneproject.beautyboost.ui
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -14,6 +15,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import com.capstoneproject.beautyboost.R
+import com.capstoneproject.beautyboost.data.KEY_ONBOARDING_COMPLETED
+import com.capstoneproject.beautyboost.data.KEY_PROFILE_COMPLETE
+import com.capstoneproject.beautyboost.data.PREFS_NAME
 import com.capstoneproject.beautyboost.databinding.ActivityMainBinding
 import com.capstoneproject.beautyboost.databinding.ActivityProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -64,10 +68,10 @@ class ProfileActivity : AppCompatActivity() {
             binding.nameTextField.editText?.setText(userName)
         }
 
-        val btnLogout = findViewById<Button>(R.id.logoutButton)
-        btnLogout.setOnClickListener{
-            signOut()
-        }
+//        val btnLogout = findViewById<Button>(R.id.logoutButton)
+//        btnLogout.setOnClickListener{
+//            signOut()
+//        }
 
         binding.skinTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val radioButton = findViewById<RadioButton>(checkedId)
@@ -89,7 +93,15 @@ class ProfileActivity : AppCompatActivity() {
                 val message = "Name: $name, Age: $age, Skin Type: $skinType, Gender: $gender"
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 val moveIntent = Intent(this@ProfileActivity, HomeActivity::class.java)
+
+                val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                with(sharedPreferences.edit()) {
+                    putBoolean(KEY_PROFILE_COMPLETE, true)
+                    apply()
+                }
+
                 startActivity(moveIntent)
+                finish()
             } else {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
             }

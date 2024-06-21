@@ -1,5 +1,6 @@
 package com.capstoneproject.beautyboost
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -12,8 +13,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.lifecycleScope
+import com.capstoneproject.beautyboost.data.KEY_ONBOARDING_COMPLETED
+import com.capstoneproject.beautyboost.data.KEY_PROFILE_COMPLETE
+import com.capstoneproject.beautyboost.data.PREFS_NAME
 import com.capstoneproject.beautyboost.databinding.ActivityMainBinding
+import com.capstoneproject.beautyboost.ui.GettingStarted1
+import com.capstoneproject.beautyboost.ui.HomeActivity
 import com.capstoneproject.beautyboost.ui.LoginActivity
+import com.capstoneproject.beautyboost.ui.ProfileActivity
 import com.capstoneproject.beautyboost.ui.SignInActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -42,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val onboardingCompleted = sharedPreferences.getBoolean(KEY_ONBOARDING_COMPLETED, false)
+        val onProfileCompleted = sharedPreferences.getBoolean(KEY_PROFILE_COMPLETE, false)
+
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
@@ -51,46 +63,72 @@ class MainActivity : AppCompatActivity() {
 
         val firebaseUser = auth.currentUser
 
-        if (firebaseUser == null) {
+        if (firebaseUser != null) {
             // Not signed in, launch the Login activity
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-            return
-        }else{
-            val userName = firebaseUser.displayName?.split(" ")?.get(0) ?: "User"
-            binding.name.text = "Hi, " + userName
-        }
-
-        val btnLogout = findViewById<Button>(R.id.buttonLogout)
-        btnLogout.setOnClickListener{
-            signOut()
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.sign_out_menu -> {
-                signOut()
-                true
+            if (onProfileCompleted){
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+                return
+            } else{
+                startActivity(Intent(this, ProfileActivity::class.java))
+                finish()
+                return
             }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
-    private fun signOut() {
-        auth.signOut()
+        }else{
+            if (!onboardingCompleted && !onProfileCompleted) {
 
-        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            // Optional: Update UI or show a message to the user
-            val intent = Intent(this@MainActivity, SignInActivity::class.java)
-            startActivity(intent)
-            finish()
+                startActivity(Intent(this, GettingStarted1::class.java))
+                finish()
+                return
+
+            } else if (onboardingCompleted && !onProfileCompleted) {
+                // Start the OnboardingActivity
+                startActivity(Intent(this, ProfileActivity::class.java))
+                finish()
+                return
+            }
+             else{
+                startActivity(Intent(this, SignInActivity::class.java))
+                finish()
+                return
+            }
+//            startActivity(Intent(this, GettingStarted1::class.java))
+//            finish()
+//            return
+
         }
-    }
+//
+//        val btnLogout = findViewById<Button>(R.id.buttonLogout)
+//        btnLogout.setOnClickListener{
+//            signOut()
+        }
+//    }
+
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        val inflater = menuInflater
+//        inflater.inflate(R.menu.main_menu, menu)
+//        return true
+//    }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.sign_out_menu -> {
+//                signOut()
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
+
+//    private fun signOut() {
+//        auth.signOut()
+//
+//        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+//            // Optional: Update UI or show a message to the user
+//            val intent = Intent(this@MainActivity, SignInActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//    }
 }

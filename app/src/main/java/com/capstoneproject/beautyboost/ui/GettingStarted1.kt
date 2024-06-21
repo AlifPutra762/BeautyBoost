@@ -32,6 +32,7 @@ class GettingStarted1 : AppCompatActivity(), View.OnClickListener {
             R.id.nextButton -> {
                 val moveIntent = Intent(this, GettingStarted2::class.java)
                 startActivity(moveIntent)
+                finish()
             }
         }
     }

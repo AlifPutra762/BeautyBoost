@@ -187,16 +187,16 @@
 			android:text="Submit"
 			android:textColor="#FFFFFF" />
 		
-		<androidx.appcompat.widget.AppCompatButton
-			android:id="@+id/logoutButton"
-			android:background="@drawable/rounded_outline_button"
-			android:layout_marginHorizontal="20dp"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="Logout"
-			android:layout_gravity="center"
-			android:textColor="@color/black"
-			android:layout_marginTop="16dp"/>
+<!--		<androidx.appcompat.widget.AppCompatButton-->
+<!--			android:id="@+id/logoutButton"-->
+<!--			android:background="@drawable/rounded_outline_button"-->
+<!--			android:layout_marginHorizontal="20dp"-->
+<!--			android:layout_width="match_parent"-->
+<!--			android:layout_height="wrap_content"-->
+<!--			android:text="Logout"-->
+<!--			android:layout_gravity="center"-->
+<!--			android:textColor="@color/black"-->
+<!--			android:layout_marginTop="16dp"/>-->
 	</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
